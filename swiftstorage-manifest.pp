@@ -3,14 +3,14 @@
 
 #Set ip address in account-server.conf file
 file_line { 'ipconfig-account:':
-	path=>"/opt/biocloud/storage/account-server.conf",
+	path=>"/opt/biocloud/docker/storage/account-server.conf",
 	line=>"bind_ip = ${ipaddress_eth0}",
 	match=>".*bind_ip.*",
 }
 
 #Set ip address in container-server.conf file
 file_line { 'ipconfig-container:':
-        path=>"/opt/biocloud/storage/container-server.conf",
+        path=>"/opt/biocloud/docker/storage/container-server.conf",
         line=>"bind_ip = ${ipaddress_eth0}",
         match=>".*bind_ip.*",
 }
@@ -18,7 +18,7 @@ file_line { 'ipconfig-container:':
 
 #Set ip address in object-server.conf file
 file_line { 'ipconfig-object:':
-        path=>"/opt/biocloud/storage/object-server.conf",
+        path=>"/opt/biocloud/docker/storage/object-server.conf",
         line=>"bind_ip = ${ipaddress_eth0}",
         match=>".*bind_ip.*",
 }

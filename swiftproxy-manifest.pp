@@ -3,7 +3,7 @@
 
 #Set ip address in proxy file
 file_line { 'ipconfig:':
-	path=>"/opt/biocloud/proxy/proxy-server.conf",
+	path=>"/opt/biocloud/docker/proxy/proxy-server.conf",
 	line=>"bind_ip = ${ipaddress_eth0}",
 	match=>".*bind_ip.*",
 }
