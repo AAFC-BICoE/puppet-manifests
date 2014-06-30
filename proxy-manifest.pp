@@ -1,3 +1,3 @@
-include dockerswift::dockersetup
-include dockerswift::swiftproxy
-Class['dockerswift::dockersetup'] -> Class['dockerswift::swiftproxy']
+include docker::setup
+include swift::proxy
+Class['docker::setup'] -> Class['swift::proxy']

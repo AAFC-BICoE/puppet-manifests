@@ -1,6 +1,6 @@
 #Class to configure a node to act as a swift storage node
 
-class dockerswift::swiftstorage {
+class swift::storage {
         #Set ip address in account-server.conf file
         file_line { 'ipconfig-account:':
                 path=>"/opt/biocloud/docker/storage/account-server.conf",

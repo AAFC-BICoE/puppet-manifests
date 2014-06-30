@@ -1,6 +1,6 @@
 #NOTE - This class is, for now, only compatible with Debian-based distros. This is because the Dockerfiles I made use features that are only available in Docker 1.0 or higher, which was only just released and such is still in developer PPAs.
 
-class dockerswift::dockersetup {
+class docker::setup {
         #Get the key
         exec { 'docker-key':
                 command=>'/usr/bin/apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9',

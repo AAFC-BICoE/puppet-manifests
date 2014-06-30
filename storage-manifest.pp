@@ -1,3 +1,3 @@
-include dockerswift::dockersetup
-include dockerswift::swiftstorage
-Class['dockerswift::dockersetup'] -> Class['dockerswift::swiftstorage']
+include docker::setup
+include swift::storage
+Class['docker::setup'] -> Class['swift::storage']
