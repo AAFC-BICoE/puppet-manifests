@@ -27,7 +27,7 @@ class dkms {
   include gcc
 
   case $::operatingsystem {
-    'RedHat', 'CentOS', 'Scientific': {
+    redhat, centos: {
       # We need kernel-devel for DKMS.
       if !defined(Package['kernel-devel']) {
         package { 'kernel-devel':
@@ -44,7 +44,7 @@ class dkms {
         require => Class['gcc'],
       }
     }
-    'Debian': {
+    debian, ubuntu: {
       package { 'dkms':
         ensure => present,
       }
@@ -62,8 +62,8 @@ class zfs (
 	$fuse = false,
 ) {
 
-  case $operatingsystem {
-    redhat: {
+  case $::operatingsystem {
+    redhat, centos: {
       include dkms
 
       package { 'zfs-release':
