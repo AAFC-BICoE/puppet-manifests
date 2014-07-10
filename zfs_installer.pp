@@ -1,23 +1,24 @@
 import 'zfs.pp'
 
-class zfs::installer (
-	$vdevs=undef, 
-	$mirrors="", 
+class zfs_installer (
+	$raidz=undef, 
+	$mirrors=undef, 
 	$zpool_name="zpool1",
 	$fs_name="storage",
 	$mountpoint="/$zpool_name/$fs_name",
-	$raid_parity="1", 
-	$vdev_spare="",
+	$raid_parity="raidz1", 
+	$vdev_spare=undef,
 	$readonly="off",
 	$sharenfs="off",
-	$sharesmb="off"
-	$dedup="off" ) {
+	$sharesmb="off",
+	$dedup="off",
+) {
 
 	require zfs
 
         zpool { "$zpool_name":
                 ensure => present,
-                disk => $vdevs,
+                raidz => $raidz,
                 mirror => $mirrors,
                 raid_parity => $raid_parity,
                 spare => $vdev_spare,
