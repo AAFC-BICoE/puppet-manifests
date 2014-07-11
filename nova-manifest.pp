@@ -82,9 +82,64 @@ file { '/etc/nova/dnsmasq-nova.conf':
         content=>"cache-size=0",
 }
 
-#Creating main nova configuration file
-#for now, just copies local configuration file
-#Will be replaced by a more robust manifest in a later version
+#Creating main nova configuration file; sourced from local file
 exec { 'nova-config':
         command=>'cp nova.conf /etc/nova/nova.conf',
+}
+
+#Set node IP address in places where its required
+file_line { 'rabbit-host-config:':
+	path=>"/etc/nova/nova.conf",
+	line=>"rabbit_host=${ipaddress_eth0}",
+	match=>".*rabbit_host.*",
+	require=>Exec['nova-config'],
+}
+
+file_line { 'my-ip-config:':
+	path=>"/etc/nova/nova.conf",
+	line=>"my_ip=${ipaddress_eth0}",
+	match=>".*my_ip=.*",
+	require=>Exec['nova-config'],
+}
+
+file_line { 'novncproxy-config:':
+	path=>"/etc/nova/nova.conf",
+	line=>"novncproxy_host=${ipaddress_eth0}",
+	match=>".*novncproxy_host.*",
+	require=>Exec['nova-config'],
+}
+
+file_line { 'vncserver-listen-config:':
+	path=>"/etc/nova/nova.conf",
+	line=>"vncserver_listen=${ipaddress_eth0}",
+	match=>".*vncserver_listen.*",
+	require=>Exec['nova-config'],
+}
+
+file_line { 'vncserver-proxyclient-config:':
+	path=>"/etc/nova/nova.conf",
+	line=>"vncserver_proxyclient_address=${ipaddress_eth0}",
+	match=>".*vncserver_proxyclient_address.*",
+	require=>Exec['nova-config'],
+}
+
+file_line { 'osapi-config:':
+	path=>"/etc/nova/nova.conf",
+	line=>"osapi_compute_listen=${ipaddress_eth0}",
+	match=>".*osapi_compute_listen.*",
+	require=>Exec['nova-config'],
+}
+
+file_line { 'ec2-listen-config:':
+	path=>"/etc/nova/nova.conf",
+	line=>"ec2_listen=${ipaddress_eth0}",
+	match=>".*ec2_listen.*",
+	require=>Exec['nova-config'],
+}
+
+file_line { 'ec2-host:':
+	path=>"/etc/nova/nova.conf",
+	line=>"ec2_host=${ipaddress_eth0}",
+	match=>".*ec2_host.*",
+	require=>Exec['nova-config'],
 }
