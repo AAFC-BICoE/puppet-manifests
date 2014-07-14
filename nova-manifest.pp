@@ -1,4 +1,5 @@
-#Puppet manifest for setting up a compute node
+#Puppet manifest for setting up a compute controller node
+#Additional compute nodes require less configuration - I'll make a seperate puppet manifest for a compute-only node soon
 
 #Installs nova software & dependencies
 package { 'rabbitmq-server':
