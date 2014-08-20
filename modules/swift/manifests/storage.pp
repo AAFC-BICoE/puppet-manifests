@@ -11,19 +11,19 @@ class swift::storage {
 	#Create account-server.conf
 	file { '/opt/biocloud/docker/swift/storage/account-server.conf':
 	        ensure=>present,
-	        content=>"[DEFAULT]\nbind_ip = ${ipaddress_eth0}\nbind_port = 6002\n\n[pipeline:main]\npipeline = healthcheck recon account-server\n\n[app:account-server]\nuse = egg:swift#account\n\n[filter:healthcheck]\nuse = egg:swift#healthcheck\n\n[filter:recon]\nuse = egg:swift#recon",
+	        content=>"[DEFAULT]\nbind_ip = ${ipaddress_eth0}\nbind_port = 6002\n\n[pipeline:main]\npipeline = healthcheck recon account-server\n\n[app:account-server]\nuse = egg:swift#account\n\n[filter:healthcheck]\nuse = egg:swift#healthcheck\n\n[filter:recon]\nuse = egg:swift#recon\n\n[account-replicator]\n\n[account-auditor]\n\n[account-reaper]",
 	}
 
 	#Create container-server.conf
 	file { '/opt/biocloud/docker/swift/storage/container-server.conf':
 	        ensure=>present,
-	        content=>"[DEFAULT]\nbind_ip = ${ipaddress_eth0}\nbind_port = 6001\n\n[pipeline:main]\npipeline = healthcheck recon container-server\n\n[app:container-server]\nuse = egg:swift#container\n\n[filter:healthcheck]\nuse = egg:swift#healthcheck\n\n[filter:recon]\nuse = egg:swift#recon",
+	        content=>"[DEFAULT]\nbind_ip = ${ipaddress_eth0}\nbind_port = 6001\n\n[pipeline:main]\npipeline = healthcheck recon container-server\n\n[app:container-server]\nuse = egg:swift#container\n\n[filter:healthcheck]\nuse = egg:swift#healthcheck\n\n[filter:recon]\nuse = egg:swift#recon\n\ncontainer-replicator]\n\n[container-updater]\n\n[container-auditor]\n\n[container-sync]",
 	}
 
 	#Create object-server.conf
 	file { '/opt/biocloud/docker/swift/storage/object-server.conf':
 	        ensure=>present,
-        	content=>"[DEFAULT]\nbind_ip = ${ipaddress_eth0}\nbind_port = 6000\n\n[pipeline:main]\npipeline = healthcheck recon object-server\n\n[app:object-server]\nuse = egg:swift#object\n\n[filter:healthcheck]\nuse = egg:swift#healthcheck\n\n[filter:recon]\nuse = egg:swift#recon",
+        	content=>"[DEFAULT]\nbind_ip = ${ipaddress_eth0}\nbind_port = 6000\n\n[pipeline:main]\npipeline = healthcheck recon object-server\n\n[app:object-server]\nuse = egg:swift#object\n\n[filter:healthcheck]\nuse = egg:swift#healthcheck\n\n[filter:recon]\nuse = egg:swift#recon\n\n[object-replicator]\n\n[object-updater]\n\n[object-auditor]",
 	}
 
 	#Create swift.conf
